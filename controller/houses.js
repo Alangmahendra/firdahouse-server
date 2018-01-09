@@ -49,7 +49,7 @@ class House {
         let obj = {
             title : req.body.title,
             cost  : req.body.cost,
-            image : req.file.cloudStoragePublicUrl
+            image : req.file.cloudStoragePublicUrl  
         }
         Model.findByIdAndUpdate(req.params.id,obj,(err,rows)=>{
             if(err){
@@ -60,6 +60,15 @@ class House {
         })
     }
 
+    static findOne(req,res){
+        Model.findById(req.params.id,(err,rows)=>{
+            if(err){
+                res.status(500).json({message : err})
+            } else {
+                res.status(200).json({message : 'data has finded',data : rows})
+            }
+        })
+    }
     
 }
 module.exports = House

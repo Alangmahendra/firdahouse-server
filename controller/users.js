@@ -8,8 +8,7 @@ class User{
     static signup(req,res){
         bcrypt.genSalt(10, function(err, salt) {
             bcrypt.hash(req.body.password, salt, function(err, hash) {
-                let obj = {
-                    name      : req.body.name,
+                let obj = { 
                     email     : req.body.email,
                     password  : hash,
                 }
@@ -34,7 +33,7 @@ class User{
                 res.status(500).json({message:err.message})
             }
             else {
-                console.log('masuk else')
+                console.log(user)
                 bcrypt.compare(req.body.password,user.password,function(err,data){
                     if (!err){
                         let payload = {
@@ -45,7 +44,7 @@ class User{
                             if(err){
                                 res.status(500).json({message:err.message})
                             } else{
-                                res.status(200).json({message:'user has been login',token:token,user:user})
+                                res.status(200).json({message:'user has been login',token:token})
                             }
                         })
                     } 
