@@ -11,7 +11,20 @@ var houseSchema = new Schema({
     title       :  String,
     cost        :  String,
     image       :  String,
+    description : String,
+    location    : {
+        type : {
+            type: String
+        },
+        coordinates:[]
+    }
 },{timestamps:{}});
+
+
+
+houseSchema.index({ 
+    "location": "2dsphere",
+  })
 
 let HousesModel = mongoose.model('House', houseSchema);
 module.exports = HousesModel;
